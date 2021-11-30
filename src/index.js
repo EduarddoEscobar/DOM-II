@@ -93,5 +93,28 @@ document.addEventListener('copy', function(event){
     alert('You can copy just change it up a bit so the teacher doesn\'t notice');
 })
 
+let scale =  1;
+const destination = document.querySelector('.content-destination');
+destination.addEventListener('wheel', function(event){
+    event.preventDefault();
+    event.deltaY < 0 ? scale *= event.deltaY * -2: scale /= event.deltaY * 2;
+    scale = Math.min(Math.max(0.5, scale), 1.35);
+    destination.style.transform = `scale(${scale})`;
+})
+
+const contentPick = document.querySelector('.content-pick');
+contentPick.addEventListener('mouseenter', function(){
+    scale = 2;
+    let tabs = contentPick.querySelectorAll('.destination');
+    tabs.forEach(element => element.style.transform = `scale(${scale})`);
+});
+contentPick.addEventListener('mouseleave', function(){
+    scale = 1;
+    let tabs = contentPick.querySelectorAll('.destination');
+    tabs.forEach(element => element.style.transform = `scale(${scale})`);
+});
+
+
+
 
 
